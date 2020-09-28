@@ -26,6 +26,9 @@ class App extends React.Component {
 
   handleSubmitSignUp = (e) => {
     e.preventDefault()
+    const username = e.target.username.value
+    const password = e.target.password.value
+
     fetch(`${url}/user`, {
       headers: {
         'Accept': 'application/json',
@@ -33,10 +36,20 @@ class App extends React.Component {
       },
       method: 'post',
       body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value
+        username: username,
+        password: password
       })
-    })
+    }).then(res => res.json())
+    .then((user) => {
+        user.find(u => {
+          if (u.username === username && u.password === password) {
+            this.setState({ currentUser: u, userIsLogin: true })
+            console.log(this.state.currentUser, this.state.userIsLogin)
+          } else {
+            this.setState({ loginError: true })
+          }
+        })
+      })
   }
 
   handleUserLogin = (e) => {
