@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from './components/Login'
 import { Router, Switch, Link } from 'react-router-dom';
-import Main from '.components/Main';
+import Main from './components/Main'
 
 const url = "http://localhost:3000"
 
