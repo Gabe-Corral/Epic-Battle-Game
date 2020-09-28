@@ -5,28 +5,6 @@ import EnemyDisplay from "./EnemyDisplay";
 
 class Main extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            user: [],
-            character: []
-        }
-    }
-
-    componentDidMount(){
-        fetch('http://localhost:3000/users')
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({
-                    user: result[0],
-                    character: result[0].character
-                })
-            }
-        )
-    }
-
-
     render() {
         return (
             <div className= "main-page">

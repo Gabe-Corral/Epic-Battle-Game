@@ -1,13 +1,77 @@
 import React from 'react';
-import './App.css';
-import Main from './Main'
 
-function App() {
-  return (
-    <div className="App">
-        <Main />
-    </div>
-  );
+import './App.css';
+import Login from './components/Login'
+import { Router, Switch, Link } from 'react-router-dom';
+import Main from './components/Main'
+import { render } from '@testing-library/react';
+
+const url = "http://localhost:3000"
+
+class App extends React.Component {
+  
+  state = {
+    currentUser: {},
+    currentCharacter: {},
+    loginError: false,
+    userIsLogin: false,
+  }
+  
+  componentDidMount = () => {
+    this.fetchData('users')
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+
+  fetchData = (type) => {
+    return fetch(`${url}/${type}`)
+  }
+
+  handleSubmitSignUp = (e) => {
+    e.preventDefault()
+    fetch(`${url}/users`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({
+        username: e.target.username.value,
+        password: e.target.password.value
+      })
+    })
+  }
+
+  handleUserLogin = (e) => {
+    e.preventDefault()
+    const username = e.target.username.value
+    const password = e.target.password.value
+
+    fetch(`${url}/users`)
+    .then(res => res.json())
+    .then((user) => {
+      user.find(u => {
+        if (u.username === username && u.password === password) {
+          this.setState({ currentUser: u, userIsLogin: true })
+          console.log(this.state.currentUser, this.state.userIsLogin)
+        } else {
+          this.setState({ loginError: true })
+        }
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Login
+        handleSubmitSignUp={this.handleSubmitSignUp}
+        handleUserLogin={this.handleUserLogin}
+        loginError={this.state.loginError}
+      />
+      </div>
+    );
+  }
 }
 
 export default App;
