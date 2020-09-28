@@ -3,20 +3,21 @@ import './App.css';
 import Login from './components/Login'
 import { Router, Switch, Link } from 'react-router-dom';
 import Main from './components/Main'
+import { render } from '@testing-library/react';
 
 const url = "http://localhost:3000"
 
 class App extends React.Component {
-
+  
   state = {
     currentUser: {},
     currentCharacter: {},
     loginError: false,
     userIsLogin: false,
   }
-
+  
   componentDidMount = () => {
-    this.fetchData('user')
+    this.fetchData('users')
     .then(res => res.json())
     .then(data => console.log(data))
   }
@@ -27,7 +28,7 @@ class App extends React.Component {
 
   handleSubmitSignUp = (e) => {
     e.preventDefault()
-    fetch(`${url}/user`, {
+    fetch(`${url}/users`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -45,7 +46,7 @@ class App extends React.Component {
     const username = e.target.username.value
     const password = e.target.password.value
 
-    fetch(`${url}/user`)
+    fetch(`${url}/users`)
     .then(res => res.json())
     .then((user) => {
       user.find(u => {
@@ -62,10 +63,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <Login
-      handleSubmitSignUp={this.handleSubmitSignUp}
-      handleUserLogin={this.handleUserLogin}
-      loginError={this.state.loginError}
+        <Login
+        handleSubmitSignUp={this.handleSubmitSignUp}
+        handleUserLogin={this.handleUserLogin}
+        loginError={this.state.loginError}
       />
       </div>
     );

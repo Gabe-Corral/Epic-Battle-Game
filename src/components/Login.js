@@ -20,6 +20,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
+      <h1>Epic Battle Game</h1>
       <button onClick={this.handleLogin} className="login-btn">Login</button>
       <button onClick={this.handleSignUp} className="login-btn">Sign Up</button>
       {this.state.showLogin ? (
@@ -57,6 +58,7 @@ class Login extends React.Component {
       ) : (
         ""
       )}
+      <p>Some description about our game.</p>
       </div>
     )
   }
