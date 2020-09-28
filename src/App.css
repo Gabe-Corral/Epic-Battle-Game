@@ -43,6 +43,8 @@
 form {
   border: 3px solid #f1f1f1;
   background-color: lightblue;
+  width: 40%;
+  display: inline-block;
 }
 
 input[type=text], input[type=password] {
@@ -57,7 +59,7 @@ input[type=text], input[type=password] {
 button {
   background-color: blue;
   color: white;
-  padding: 14px 20px;
+  padding: 10px 10px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
