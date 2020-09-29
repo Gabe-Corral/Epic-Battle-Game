@@ -8,7 +8,7 @@ const url = "http://localhost:3000"
 class Main extends Component {
 
   createCharacter = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     fetch(`${url}/character`, {
       headers: {
         'Accept': 'application/json',
@@ -32,7 +32,7 @@ class Main extends Component {
         return (
             <div className= "main-page">
             <UserDisplay user={this.props.user}/>
-            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter}/>
+            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} showCharacter={this.props.showCharacter} />
             </div>
         )
     }

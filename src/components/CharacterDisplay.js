@@ -5,18 +5,18 @@ const url = "http://localhost:3000"
 class CharacterDisplay extends Component {
 
     state = {
-        showForm: true,
-        showCharacter: false,
+        showForm: this.props.showForm,
+        showCharacter: this.props.showCharacter,
         points: 25,
-        character: {}
+        character: this.props.user.character
     }
-
 
 
     handleChange = (event) => {
         event.persist();
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
         event.target.dataset.prevValue = event.target.value;
+        
 
         if (direction === 'up') {
             this.setState(previousState => {
@@ -35,10 +35,12 @@ class CharacterDisplay extends Component {
 
 
     handleSubmit = (e) => {
-      e.preventDefault()
-      this.props.createCharacter(e)
-      this.setCurrentCharacter()
-      this.setState({ showCharacter: true })
+        e.preventDefault()
+        this.props.createCharacter(e)
+        setTimeout(() => {
+          this.setCurrentCharacter()
+          this.setState({ showCharacter: true })
+        }, 1000);
     }
 
     setCurrentCharacter = () => {
@@ -53,13 +55,13 @@ class CharacterDisplay extends Component {
       })
     }
 
-    render() {
+    render() {    
         return (
             <div className= "character-display">
 
 
-             {this.state.showForm ? (
-                <div className="character-form-container">
+            {this.state.showForm ? (
+             <div className="character-form-container">
                 <form className= "character-form" onSubmit={this.handleSubmit}>
                 <div>
                     <h1>Character Creation</h1>
@@ -83,6 +85,7 @@ class CharacterDisplay extends Component {
                     max="10"
                     placeholder="0"
                     data-prev-value="0"
+                    onKeyDown={(e) => e.preventDefault()}
                 />
                 </div>
                 <div>

@@ -13,6 +13,7 @@ class App extends React.Component {
     currentUser: {},
     loginError: false,
     userIsLogin: false,
+    currentCharacter: {}
   }
 
   componentDidMount = () => {
@@ -50,7 +51,7 @@ class App extends React.Component {
     .then((user) => {
       user.find(u => {
         if (u.username === username && u.password === password) {
-          this.setState({ currentUser: u, userIsLogin: true })
+          this.setState({ currentUser: u, userIsLogin: true, currentCharacter: u.character })
           console.log(this.state.currentUser, this.state.userIsLogin)
         } else {
           this.setState({ loginError: true })
@@ -60,10 +61,20 @@ class App extends React.Component {
   }
 
   render() {
+    let showForm = ''
+    let showCharacter = ''
+    if (this.state.currentCharacter !== undefined) {
+      showForm = false;
+      showCharacter = true;
+    } else {
+      showForm = true;
+      showCharacter = false;
+    }
+
     return (
       <div className="App">
       {this.state.userIsLogin ? (
-        <Main user={this.state.currentUser}/> ) : (
+        <Main user={this.state.currentUser} showForm= {showForm} showCharacter={showCharacter} /> ) : (
         <Login
         handleSubmitSignUp={this.handleSubmitSignUp}
         handleUserLogin={this.handleUserLogin}
