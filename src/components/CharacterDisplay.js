@@ -5,12 +5,11 @@ const url = "http://localhost:3000"
 class CharacterDisplay extends Component {
 
     state = {
-        showForm: true,
-        showCharacter: false,
+        showForm: this.props.showForm,
+        showCharacter: this.props.showCharacter,
         points: 25,
-        character: {}
+        character: this.props.user.character
     }
-
 
 
     handleChange = (event) => {
@@ -36,10 +35,12 @@ class CharacterDisplay extends Component {
 
 
     handleSubmit = (e) => {
-      e.preventDefault();
-      this.props.createCharacter(e)
-      this.setCurrentCharacter()
-      this.setState({ showCharacter: true })
+        e.preventDefault()
+        this.props.createCharacter(e)
+        setTimeout(() => {
+          this.setCurrentCharacter()
+          this.setState({ showCharacter: true })
+        }, 1000);
     }
 
     setCurrentCharacter = () => {
@@ -54,7 +55,7 @@ class CharacterDisplay extends Component {
       })
     }
 
-    render() {
+    render() {    
         return (
             <div className= "character-display">
 
