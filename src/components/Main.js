@@ -12,7 +12,7 @@ class Main extends Component {
   }
 
   createCharacter = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     fetch(`${url}/character`, {
       headers: {
         'Accept': 'application/json',
@@ -44,8 +44,10 @@ class Main extends Component {
         return (
             <div className= "main-page">
             <UserDisplay user={this.props.user}/>
-            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter}/>
             {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
+
+            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} showCharacter={this.props.showCharacter} />
+
             </div>
         )
     }

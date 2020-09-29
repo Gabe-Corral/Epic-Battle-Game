@@ -89,6 +89,7 @@ button:hover {
   max-width: 100%;
   margin: auto;
   border-radius: 20px;
+  text-align: center;
 }
 
 .enemy-display {
@@ -119,6 +120,19 @@ button:hover {
 }
 
 .character-form {
+  width: 350px;
+}
+
+input[type=number]{
+  width: 30px;
+} 
+
+label{
+  display: inline-block;
+  clear: left;
+  width: 250px;
+  text-align: left;
+  padding-left: 50px;
   text-align: center;
   border-radius: 20px;
 }
