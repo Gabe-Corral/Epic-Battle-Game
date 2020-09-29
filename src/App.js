@@ -17,7 +17,7 @@ class App extends React.Component {
   }
   
   componentDidMount = () => {
-    this.fetchData('users')
+    this.fetchData('user')
     .then(res => res.json())
     .then(data => console.log(data))
   }
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   handleSubmitSignUp = (e) => {
     e.preventDefault()
-    fetch(`${url}/users`, {
+    fetch(`${url}/user`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ class App extends React.Component {
     const username = e.target.username.value
     const password = e.target.password.value
 
-    fetch(`${url}/users`)
+    fetch(`${url}/user`)
     .then(res => res.json())
     .then((user) => {
       user.find(u => {

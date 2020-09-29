@@ -8,8 +8,8 @@ class Main extends Component {
     render() {
         return (
             <div className= "main-page">
-                <UserDisplay user={this.state.user} />
-                <CharacterDisplay character={this.state.character} />
+                <UserDisplay  />
+                <CharacterDisplay  />
                 <EnemyDisplay />
             </div>
         )
