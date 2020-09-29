@@ -39,7 +39,7 @@ class CharacterDisplay extends Component {
         this.props.createCharacter(e)
         setTimeout(() => {
           this.setCurrentCharacter()
-          this.setState({ showCharacter: true })
+          this.setState({ showCharacter: true }) /////////
         }, 1000);
     }
 
