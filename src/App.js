@@ -8,16 +8,15 @@ import { render } from '@testing-library/react';
 const url = "http://localhost:3000"
 
 class App extends React.Component {
-  
+
   state = {
     currentUser: {},
-    currentCharacter: {},
     loginError: false,
     userIsLogin: false,
   }
-  
+
   componentDidMount = () => {
-    this.fetchData('users')
+    this.fetchData('user')
     .then(res => res.json())
     .then(data => console.log(data))
   }
@@ -28,7 +27,7 @@ class App extends React.Component {
 
   handleSubmitSignUp = (e) => {
     e.preventDefault()
-    fetch(`${url}/users`, {
+    fetch(`${url}/user`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -46,7 +45,7 @@ class App extends React.Component {
     const username = e.target.username.value
     const password = e.target.password.value
 
-    fetch(`${url}/users`)
+    fetch(`${url}/user`)
     .then(res => res.json())
     .then((user) => {
       user.find(u => {
@@ -63,11 +62,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+      {this.state.userIsLogin ? (
+        <Main user={this.state.currentUser}/> ) : (
         <Login
         handleSubmitSignUp={this.handleSubmitSignUp}
         handleUserLogin={this.handleUserLogin}
-        loginError={this.state.loginError}
-      />
+        loginError={this.state.loginError}/>
+      )}
       </div>
     );
   }
