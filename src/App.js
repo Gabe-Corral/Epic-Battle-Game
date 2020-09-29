@@ -8,14 +8,13 @@ import { render } from '@testing-library/react';
 const url = "http://localhost:3000"
 
 class App extends React.Component {
-  
+
   state = {
     currentUser: {},
-    currentCharacter: {},
     loginError: false,
     userIsLogin: false,
   }
-  
+
   componentDidMount = () => {
     this.fetchData('user')
     .then(res => res.json())
@@ -63,11 +62,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+      {this.state.userIsLogin ? (
+        <Main user={this.state.currentUser}/> ) : (
         <Login
         handleSubmitSignUp={this.handleSubmitSignUp}
         handleUserLogin={this.handleUserLogin}
-        loginError={this.state.loginError}
-      />
+        loginError={this.state.loginError}/>
+      )}
       </div>
     );
   }
