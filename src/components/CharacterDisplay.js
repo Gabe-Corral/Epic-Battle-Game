@@ -36,7 +36,7 @@ class CharacterDisplay extends Component {
 
 
     handleSubmit = (e) => {
-      e.preventDefault()
+      e.preventDefault();
       this.props.createCharacter(e)
       this.setCurrentCharacter()
       this.setState({ showCharacter: true })
@@ -77,12 +77,14 @@ class CharacterDisplay extends Component {
                 <div>
                 <label> Physical:</label>
                 <input onInput={this.handleChange}
+                    type="number"
                     name="physical"
                     step="1"
                     min="0"
                     max="10"
                     placeholder="0"
                     data-prev-value="0"
+                    onKeyDown={(e) => e.preventDefault()}
                 />
                 </div>
                 <div>
