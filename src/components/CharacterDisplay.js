@@ -11,13 +11,11 @@ class CharacterDisplay extends Component {
         character: this.props.user.character
     }
 
-
     handleChange = (event) => {
         event.persist();
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
         event.target.dataset.prevValue = event.target.value;
         
-
         if (direction === 'up') {
             this.setState(previousState => {
                 return {
@@ -33,14 +31,13 @@ class CharacterDisplay extends Component {
         }
     }
 
-
     handleSubmit = (e) => {
-        e.preventDefault()
-        this.props.createCharacter(e)
-        setTimeout(() => {
-          this.setCurrentCharacter()
-          this.setState({ showCharacter: true })
-        }, 1000);
+      e.preventDefault()
+      this.props.createCharacter(e)
+      setTimeout(() => {
+        this.setCurrentCharacter()
+        this.setState({ showCharacter: true })
+      }, 1000);
     }
 
     setCurrentCharacter = () => {
@@ -58,7 +55,6 @@ class CharacterDisplay extends Component {
     render() {    
         return (
             <div className= "character-display">
-
 
             {this.state.showForm ? (
              <div className="character-form-container">
@@ -134,11 +130,11 @@ class CharacterDisplay extends Component {
 
 
               {this.state.showCharacter ? (
-                <div className= "character-card">
+                <div className="character-card">
                     <h3>{this.state.character.name}</h3>
-                    <img className= "character-img" src={this.state.character.img_url} alt=""></img>
+                    <img className="character-img" src={this.state.character.img_url} alt=""></img>
                     <h3>Stats:</h3>
-                    <div className= "character-stats" >
+                    <div className="character-stats" >
                         <p>Physical: {this.state.character.physical}</p>
                         <p>Magic: {this.state.character.magic} </p>
                         <p>Physical Defense: {this.state.character.physical_defense} </p>
