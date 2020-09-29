@@ -38,6 +38,7 @@ class App extends React.Component {
         password: e.target.password.value
       })
     })
+    this.handleUserLogin(e)
   }
 
   handleUserLogin = (e) => {

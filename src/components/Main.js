@@ -7,6 +7,10 @@ const url = "http://localhost:3000"
 
 class Main extends Component {
 
+  state = {
+    enemies: []
+  }
+
   createCharacter = (e) => {
     e.preventDefault()
     fetch(`${url}/character`, {
@@ -27,12 +31,21 @@ class Main extends Component {
     })
   }
 
+  componentDidMount = () => {
+    fetch(`${url}/character`)
+    .then(res => res.json())
+    .then(enemies => {
+      const enemy = enemies.filter(c => c.user_id === 1)
+      this.setState({ enemies: enemy })
+    })
+  }
 
     render() {
         return (
             <div className= "main-page">
             <UserDisplay user={this.props.user}/>
             <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter}/>
+            {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
             </div>
         )
     }
