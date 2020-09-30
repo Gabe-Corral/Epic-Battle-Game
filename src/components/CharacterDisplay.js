@@ -40,6 +40,12 @@ class CharacterDisplay extends Component {
         }
     }
 
+    componentDidMount = () => {
+        if (this.state.character !== undefined) {
+          this.setState({ showCharacter: true })
+        }
+    }
+
     handleSubmit = (e) => {
       e.preventDefault()
       const newCharacter = {
