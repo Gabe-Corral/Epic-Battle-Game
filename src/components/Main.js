@@ -11,7 +11,7 @@ class Main extends Component {
     enemies: []
   }
 
-  createCharacter = (e) => {
+  createCharacter = (e, character) => {
     e.preventDefault();
     fetch(`${url}/character`, {
       headers: {
@@ -19,15 +19,7 @@ class Main extends Component {
         'Content-Type': 'application/json'
       },
       method: 'post',
-      body: JSON.stringify({
-        name: e.target.name.value,
-        img_url: e.target.img_url.value,
-        physical: e.target.physical.value,
-        magic: e.target.magic.value,
-        physical_defense: e.target.physical_defense.value,
-        magic_defense: e.target.magic_defense.value,
-        user_id: this.props.user.id
-      })
+      body: JSON.stringify(character)
     })
   }
 
@@ -44,10 +36,11 @@ class Main extends Component {
         return (
             <div className= "main-page">
             <UserDisplay user={this.props.user}/>
-            {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
 
-            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} showCharacter={this.props.showCharacter} />
-
+            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} />
+            <div className="enemy-container">
+              {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
+            </div>
             </div>
         )
     }
