@@ -1,5 +1,10 @@
 .App {
-  text-align: none;
+  text-align: center;
+  background: url(background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .App-logo {
@@ -40,6 +45,8 @@
 .login {
   text-align: center;
 }
+
+
 form {
   border: 3px solid #f1f1f1;
   background-color: lightblue;
@@ -88,8 +95,9 @@ button:hover {
   min-height: 250px;
   max-width: 100%;
   margin: auto;
-  border-radius: 20px;
   text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .enemy-display {
@@ -100,15 +108,26 @@ button:hover {
   width: 350px;
   border: 2px solid #030303;
   border-radius: 20px;
-  background-color: #8B0000;
+  background-color: #8d0101ee;
 }
+
+.enemy-display:hover {
+  transform: translate3D(0,-1px,0) scale(1.06);
+  box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+  transition: all .4s ease; /* zoom in */
+}
+
+.enemy-banner {
+  text-align: center;
+}
+
 
 .character-card {
   width: 350px;
   border: 2px solid #030303;
   border-radius: 20px;
   text-align: center;
-  background-color: lightblue;
+  background-color: #0336719f;
 }
 
 
@@ -150,4 +169,32 @@ button {
   padding-top: 30px;
   padding-bottom: 30px;
   justify-content: center;
+}
+
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white
+}
+
+p {
+  color: white;
+}
+
+.form-title {
+  color: black;
+}
+
+.attribute-title {
+  color: black;
+}
+
+.points {
+  color: black;
 }

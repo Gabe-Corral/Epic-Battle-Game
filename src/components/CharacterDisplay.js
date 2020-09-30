@@ -68,7 +68,7 @@ class CharacterDisplay extends Component {
              <div className="character-form-container">
                 <form className= "character-form" onSubmit={this.handleSubmit}>
                 <div>
-                    <h1>Character Creation</h1>
+                    <h1 className= "form-title">Character Creation</h1>
                 </div>
                 <div>
                 <input type="text" placeholder="Enter Character Name" name="name"/>
@@ -76,8 +76,8 @@ class CharacterDisplay extends Component {
                 <input type="text" placeholder="Enter Image URL" name="img_url"/>
                 <div>
                 <div>
-                    <h2>Assign Attribute Points</h2>
-                    <h3>Points Left: {this.state.points}</h3>
+                    <h2 className="attribute-title">Assign Attribute Points</h2>
+                    <h3 className="points">Points Left: {this.state.points}</h3>
                 </div>
                 <div>
                 <label> Physical:</label>
