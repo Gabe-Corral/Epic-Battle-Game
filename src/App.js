@@ -40,7 +40,19 @@ class App extends React.Component {
       method: 'post',
       body: JSON.stringify(newUser)
     })
-    this.setState({ currentUser: newUser, userIsLogin: true, currentCharacter: undefined })
+    this.getLastId(e.target.username.value, e.target.password.value)
+  }
+
+  getLastId = (username, password) => {
+    fetch(`${url}/user`).then(res => res.json())
+    .then(data => {
+      const newUser = {
+        id: data[data.length - 1].id + 1,
+        username: username,
+        password: password
+      }
+      this.setState({ currentUser: newUser, userIsLogin: true, currentCharacter: undefined })
+    })
   }
 
   handleUserLogin = (e) => {
