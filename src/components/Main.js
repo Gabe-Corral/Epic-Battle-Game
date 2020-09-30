@@ -40,6 +40,9 @@ class Main extends Component {
             <UserDisplay user={this.props.user}/>
 
             <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} character={this.state.character}/>
+            <div className="enemy-banner">
+                <h1>Choose your Opponent</h1>
+            </div>
             <div className="enemy-container">
               {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
             </div>

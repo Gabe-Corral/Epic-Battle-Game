@@ -4,7 +4,7 @@ class UserDisplay extends Component {
     render() {
         return (
             <div className= "user-display">
-                Welcome to Epic Battle {this.props.user.username}!
+                <h1>Welcome to Epic Battle {this.props.user.username}!</h1>
             </div>
         )
     }
