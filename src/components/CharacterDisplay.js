@@ -6,11 +6,18 @@ class CharacterDisplay extends Component {
         showForm: this.props.showForm,
         showCharacter: false,
         points: 25,
-        character: this.props.user.character
+        character: this.props.user.character,
+        pointError: false
     }
  
     handleChange = (event) => {
         event.persist();
+        if (this.state.points < 1) {
+            this.setState({
+                pointError: true
+            })
+        } 
+
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
         event.target.dataset.prevValue = event.target.value;
 
@@ -22,8 +29,12 @@ class CharacterDisplay extends Component {
             })
         } else if (direction === 'down') {
             this.setState(previousState => {
-                return {
-                    points: previousState.points + 1
+                if (previousState.points === 25) {
+                    return
+                } else {
+                    return {
+                        points: previousState.points + 1
+                    }
                 }
             })
         }
@@ -118,6 +129,12 @@ class CharacterDisplay extends Component {
                 </div>
             ) : (
               ""
+            )}
+
+            {this.state.pointError ? (
+                <span className="error">Available attribute points exceeded! Please adjust your attributes!</span>
+            ) : (
+                ""
             )}
 
 
