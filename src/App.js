@@ -38,12 +38,8 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       method: 'post',
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value
-      })
+      body: JSON.stringify(newUser)
     })
-    this.handleUserLogin(e)
     this.setState({ currentUser: newUser, userIsLogin: true, currentCharacter: undefined })
   }
 

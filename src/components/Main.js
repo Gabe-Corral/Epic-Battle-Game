@@ -36,10 +36,11 @@ class Main extends Component {
         return (
             <div className= "main-page">
             <UserDisplay user={this.props.user}/>
-            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} showCharacter={this.props.showCharacter} />
-              <div className="enemy-container">
-                {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
-              </div>
+
+            <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} />
+            <div className="enemy-container">
+              {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name}/>)}
+            </div>
             </div>
         )
     }
