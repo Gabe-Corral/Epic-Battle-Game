@@ -31,6 +31,12 @@ class CharacterDisplay extends Component {
         }
     }
 
+    componentDidMount = () => {
+      if (this.state.character !== undefined) {
+        this.setState({ showCharacter: true })
+      }
+    }
+
     handleSubmit = (e) => {
       e.preventDefault()
       const newCharacter = {
@@ -43,13 +49,12 @@ class CharacterDisplay extends Component {
         user_id: this.props.user.id
       }
       this.props.createCharacter(e, newCharacter)
-      this.setState({ character: newCharacter, showCharacter: true })
+      this.setState({ character: newCharacter, showCharacter: true, showForm: false })
     }
 
     render() {
         return (
             <div className= "character-display">
-
             {this.state.showForm ? (
              <div className="character-form-container">
                 <form className= "character-form" onSubmit={this.handleSubmit}>
