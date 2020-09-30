@@ -16,7 +16,7 @@ class CharacterDisplay extends Component {
             this.setState({
                 pointError: true
             })
-        } 
+        }
 
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
         event.target.dataset.prevValue = event.target.value;
@@ -52,7 +52,7 @@ class CharacterDisplay extends Component {
         user_id: this.props.user.id
       }
       this.props.createCharacter(e, newCharacter)
-      this.setState({ character: newCharacter, showCharacter: true, showForm: false})
+      this.setState({ character: newCharacter, showCharacter: true, showForm: false, pointError: false})
     }
 
     render() {
