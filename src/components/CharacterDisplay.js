@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-const url = "http://localhost:3000"
-
 class CharacterDisplay extends Component {
 
     state = {
@@ -10,7 +8,7 @@ class CharacterDisplay extends Component {
         points: 25,
         character: this.props.user.character
     }
-
+ 
     handleChange = (event) => {
         event.persist();
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
@@ -43,7 +41,7 @@ class CharacterDisplay extends Component {
         user_id: this.props.user.id
       }
       this.props.createCharacter(e, newCharacter)
-      this.setState({ character: newCharacter, showCharacter: true })
+      this.setState({ character: newCharacter, showCharacter: true, showForm: false})
     }
 
     render() {
