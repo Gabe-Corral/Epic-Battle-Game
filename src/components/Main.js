@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CharacterDisplay from "./CharacterDisplay";
 import UserDisplay from "./UserDisplay";
 import EnemyDisplay from "./EnemyDisplay";
+import HealthBar from "./HealthBar";
 
 const url = "http://localhost:3000"
 
