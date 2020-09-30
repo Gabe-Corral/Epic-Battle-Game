@@ -27,6 +27,10 @@ class App extends React.Component {
   }
 
   handleSubmitSignUp = (e) => {
+    const newUser = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
     e.preventDefault()
     fetch(`${url}/user`, {
       headers: {
@@ -39,6 +43,8 @@ class App extends React.Component {
         password: e.target.password.value
       })
     })
+    this.handleUserLogin(e)
+    this.setState({ currentUser: newUser, userIsLogin: true, currentCharacter: undefined })
   }
 
   handleUserLogin = (e) => {
