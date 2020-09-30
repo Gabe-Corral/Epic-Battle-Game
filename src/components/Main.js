@@ -9,7 +9,7 @@ class Main extends Component {
 
   state = {
     enemies: [],
-    character: null
+    character: null,
   }
 
   createCharacter = (e, character) => {
@@ -27,8 +27,8 @@ class Main extends Component {
   componentDidMount = () => {
     fetch(`${url}/character`)
     .then(res => res.json())
-    .then(enemies => {
-      const enemy = enemies.filter(c => c.user_id === 1)
+    .then(res => {
+      const enemy = res.filter(c => c.user_id === 1)
       const character = res.find(c => c.user_id === this.props.user.id)
       this.setState({ enemies: enemy, character: character })
     })

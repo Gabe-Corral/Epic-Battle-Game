@@ -41,9 +41,9 @@ class CharacterDisplay extends Component {
     }
 
     componentDidMount = () => {
-        if (this.state.character !== undefined) {
-          this.setState({ showCharacter: true })
-        }
+      if (this.state.character !== undefined) {
+        this.setState({ showCharacter: true })
+      }
     }
 
     handleSubmit = (e) => {
@@ -64,7 +64,6 @@ class CharacterDisplay extends Component {
     render() {
         return (
             <div className= "character-display">
-
             {this.state.showForm ? (
              <div className="character-form-container">
                 <form className= "character-form" onSubmit={this.handleSubmit}>
