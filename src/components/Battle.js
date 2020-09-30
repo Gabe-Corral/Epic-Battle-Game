@@ -28,7 +28,9 @@ class Battle extends React.Component {
           </div>
           </div>
       </div>
+      </div>
     )
   }
 }
+
 export default Battle;
