@@ -5,6 +5,7 @@ import {
 } from './util/HealthBarUtils';
 
 export default function HealthBar({
+  props,
   colors = defaultColorPallet,
   width = 350,
   height = 24
