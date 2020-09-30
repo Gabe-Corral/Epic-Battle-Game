@@ -6,7 +6,7 @@ class CharacterDisplay extends Component {
 
     state = {
         showForm: this.props.showForm,
-        showCharacter: this.props.showCharacter,
+        showCharacter: false,
         points: 25,
         character: this.props.user.character
     }
@@ -15,7 +15,7 @@ class CharacterDisplay extends Component {
         event.persist();
         let direction = event.target.value > parseInt(event.target.dataset.prevValue) ? 'up' : 'down';
         event.target.dataset.prevValue = event.target.value;
-        
+
         if (direction === 'up') {
             this.setState(previousState => {
                 return {
@@ -33,26 +33,20 @@ class CharacterDisplay extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault()
-      this.props.createCharacter(e)
-      setTimeout(() => {
-        this.setCurrentCharacter()
-        this.setState({ showCharacter: true })
-      }, 1000);
+      const newCharacter = {
+        name: e.target.name.value,
+        img_url: e.target.img_url.value,
+        physical: e.target.physical.value,
+        magic: e.target.magic.value,
+        physical_defense: e.target.physical_defense.value,
+        magic_defense: e.target.magic_defense.value,
+        user_id: this.props.user.id
+      }
+      this.props.createCharacter(e, newCharacter)
+      this.setState({ character: newCharacter, showCharacter: true })
     }
 
-    setCurrentCharacter = () => {
-      fetch(`${url}/character`)
-      .then(res => res.json())
-      .then((res) => {
-        res.find(c => {
-          if (this.props.user.id === c.user_id) {
-            this.setState({ character: c })
-          }
-        })
-      })
-    }
-
-    render() {    
+    render() {
         return (
             <div className= "character-display">
 
