@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Login from './components/Login'
-import { Router, Switch, Link } from 'react-router-dom';
 import Main from './components/Main'
 import { render } from '@testing-library/react';
 
