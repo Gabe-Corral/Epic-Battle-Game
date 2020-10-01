@@ -230,3 +230,13 @@ label {
   text-align: center;
   color: white;
 }
+
+.enemy-health {
+  margin-left: 875px;
+  margin-top: -20px;
+}
+
+.your-health {
+  margin-right: 870px;
+  margin-top: -20px;
+}
