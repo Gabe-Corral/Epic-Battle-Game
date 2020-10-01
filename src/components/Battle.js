@@ -8,6 +8,12 @@ class Battle extends React.Component {
     heath: "",
     enemyHeath: "",
     redirect: this.props.redirect,
+    heath: 100,
+    enemyHeath: 100,
+  }
+
+  handleClick = () => {
+    console.log("yes")
   }
 
   render() {
@@ -28,6 +34,17 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.character.physical_defense} </p>
               <p>Magic Defense: {this.props.character.magic_defense} </p>
           </div>
+          <div>
+          <select className="dropdown" type="dropdown">
+          <option>Physical Attack</option>
+          <option>Magic Attack</option>
+          </select>
+          <select className="dropdown" type="dropdown">
+          <option>Physical Defense</option>
+          <option>Magic Defense</option>
+          </select>
+          </div>
+          <button className="attack-btn" onClick={this.handleClick}>Confirm</button>
         </div>
 
           <h2 className="vs">VS.</h2>
