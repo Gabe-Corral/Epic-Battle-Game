@@ -2,9 +2,15 @@ import React from 'react';
 
 class Battle extends React.Component {
 
+  state = {
+    heath: "",
+    enemyHeath: "",
+  }
+
   render() {
     return (
       <div className="battle">
+      <h1>Fight!</h1>
       <div className="character-card">
           <h3>{this.props.character.name}</h3>
           <img className="character-img" src={this.props.character.img_url} alt=""></img>
@@ -15,8 +21,11 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.character.physical_defense} </p>
               <p>Magic Defense: {this.props.character.magic_defense} </p>
           </div>
-          
-          <div classname="enemy">
+        </div>
+
+          <h2 className="vs">VS.</h2>
+
+          <div className="enemy-battle">
           <h3>{this.props.enemy.name}</h3>
           <img className="character-img" src={this.props.enemy.img_url} alt=""></img>
           <h3>Stats:</h3>

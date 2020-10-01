@@ -198,3 +198,21 @@ p {
 .points {
   color: black;
 }
+
+.enemy-battle {
+  margin-left: 870px;
+  margin-top: -400px;
+  min-height: 250px;
+  max-width: 100%;
+  text-align: center;
+  width: 350px;
+  border: 2px solid #030303;
+  border-radius: 20px;
+  background-color: #8d0101ee;
+}
+
+.vs {
+  margin: auto;
+  color: red;
+  font-family: "Times New Roman", Times, serif;
+}
