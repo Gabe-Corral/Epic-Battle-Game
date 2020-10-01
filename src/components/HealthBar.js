@@ -4,6 +4,7 @@ import {
   defaultColorPallet
 } from './util/HealthBarUtils';
 
+
 export default function HealthBar(props, {
   colors = defaultColorPallet,
   width = 350,
@@ -17,7 +18,7 @@ export default function HealthBar(props, {
     }, [props.damage])
 
   return (
-    <div onClick={() => setCount()}
+    <div onClick={() => setCount(50)}
       style={{
         borderRadius: '3px',
         border: '1px solid black',

@@ -14,6 +14,8 @@ class Main extends Component {
     opponents: {},
     redirect: false,
     character: null,
+    opponentName: "",
+    opponentSelected: false
   }
 
   createCharacter = (e, character) => {
@@ -25,7 +27,7 @@ class Main extends Component {
       },
       method: 'post',
       body: JSON.stringify(character)
-    })
+    }).then(this.setState({character: character}))
   }
 
   componentDidMount = () => {
@@ -39,29 +41,39 @@ class Main extends Component {
   }
 
   setOpponents = (enemy) => {
-    this.setState({ opponents: enemy, redirect: true })
+    this.setState({ opponents: enemy, redirect: true, opponentSelected: true, opponentName: enemy.name })
     console.log(this.state.redirect)
+    console.log(enemy.name)
   }
 
     render() {
         return (
             <div className= "main-page">
             <Router>
-            <div className="battle-btn"><Link to="/battle">Battle</Link></div>
             <Switch>
             <Route exact path="/">
             <UserDisplay user={this.props.user}/>
+            <h2>Your Character:</h2>
 
             <CharacterDisplay user={this.props.user} createCharacter={this.createCharacter} showForm={this.props.showForm} character={this.state.character}/>
             <div className="enemy-banner">
                 <h1>Choose your Opponent</h1>
+                {this.state.opponentSelected ? (
+                  <h2 className="opponent">{this.state.opponentName}</h2>
+                ) : ('')
+                }
+                <div className="battle-btn-container">
+                  <Link to="/battle">
+                    <button className="battle-btn">Battle</button>
+                  </Link>
+                </div>
             </div>
             <div className="enemy-container">
               {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name} setOpponents={this.setOpponents}/>)}
             </div>
             </Route>
             <Route path="/battle" >
-              <Battle character={this.state.character} enemy={this.state.opponents} />
+              <Battle character={this.state.character} enemy={this.state.opponents} redirect="/"/>
               </Route>
             </Switch>
             </Router>
