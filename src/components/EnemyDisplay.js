@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 
 class EnemyDisplay extends Component {
+
+  handleClick = (enemy) => {
+    this.props.setOpponents(enemy)
+  }
+
     render() {
         return (
-            <div className="enemy-display">
+            <div className="enemy-display" onClick={() => {
+              this.handleClick(this.props.enemy)
+            }}>
             <h3>{this.props.enemy.name}</h3>
             <img className="character-img" src={this.props.enemy.img_url} alt=""></img>
             <h3>Stats:</h3>
