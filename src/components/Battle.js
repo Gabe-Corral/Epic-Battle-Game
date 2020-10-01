@@ -1,8 +1,13 @@
 import React from 'react';
+import HealthBar from './HealthBar';
+import { Redirect } from 'react-router-dom';
 
 class Battle extends React.Component {
 
   state = {
+    heath: "",
+    enemyHeath: "",
+    redirect: this.props.redirect,
     heath: 100,
     enemyHeath: 100,
   }
@@ -12,6 +17,10 @@ class Battle extends React.Component {
   }
 
   render() {
+    if (this.props.character === null) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     return (
       <div className="battle">
       <h1>Fight!</h1>
@@ -55,4 +64,5 @@ class Battle extends React.Component {
     )
   }
 }
+
 export default Battle;
