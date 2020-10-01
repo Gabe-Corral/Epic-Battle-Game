@@ -27,7 +27,7 @@ class Main extends Component {
       },
       method: 'post',
       body: JSON.stringify(character)
-    })
+    }).then(this.setState({character: character}))
   }
 
   componentDidMount = () => {
