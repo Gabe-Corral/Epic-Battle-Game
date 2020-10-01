@@ -75,7 +75,7 @@ class Battle extends React.Component {
       <HealthBar damage={this.state.enemyDamage}/>
       </div>
       <h1>Fight!</h1>
-      <div className="character-card">
+      <div className="character-battle">
           <h3>{this.props.character.name}</h3>
           <img className="character-img" src={this.props.character.img_url} alt=""></img>
           <h3>Stats:</h3>

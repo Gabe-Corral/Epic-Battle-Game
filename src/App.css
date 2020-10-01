@@ -52,6 +52,7 @@ form {
   background-color: #86b5eb;
   width: 40%;
   display: inline-block;
+  background-color: #0336719f;
 }
 
 input[type=text], input[type=password] {
@@ -248,10 +249,18 @@ label {
 
 .enemy-health {
   margin-left: 875px;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 
 .your-health {
-  margin-right: 870px;
-  margin-top: -20px;
+  margin-right: 875px;
+  margin-top: 40px;
+}
+
+.character-battle {
+  width: 350px;
+  border: 2px solid #030303;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #0336719f;
 }
