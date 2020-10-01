@@ -1,14 +1,20 @@
 import React from 'react';
 import HealthBar from './HealthBar';
+import { Redirect } from 'react-router-dom';
 
 class Battle extends React.Component {
 
   state = {
     heath: "",
     enemyHeath: "",
+    redirect: this.props.redirect
   }
 
   render() {
+    if (this.props.character === null) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     return (
       <div className="battle">
       <h1>Fight!</h1>

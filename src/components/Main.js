@@ -73,7 +73,7 @@ class Main extends Component {
             </div>
             </Route>
             <Route path="/battle" >
-              <Battle character={this.state.character} enemy={this.state.opponents} />
+              <Battle character={this.state.character} enemy={this.state.opponents} redirect="/"/>
               </Route>
             </Switch>
             </Router>
