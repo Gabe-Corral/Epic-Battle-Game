@@ -58,7 +58,9 @@ class Login extends React.Component {
       ) : (
         ""
       )}
-      <p>Some description about our game.</p>
+      <h3>Epic Battle Game is a free-to-play, turn-based battle game where you may pit </h3>
+      <h3>your own custom-made characters against the universe's toughest foes!</h3>
+      <h3>Simply sign up/login to continue, and begin your Epic Battle!</h3>
       </div>
     )
   }
