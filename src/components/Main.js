@@ -62,7 +62,11 @@ class Main extends Component {
                   <h2 className="opponent">{this.state.opponentName}</h2>
                 ) : ('')
                 }
-                <div className="battle-btn"><Link to="/battle">Battle</Link></div>
+                <div className="battle-btn-container">
+                  <Link to="/battle">
+                    <button className="battle-btn">Battle</button>
+                  </Link>
+                </div>
             </div>
             <div className="enemy-container">
               {this.state.enemies.map(c => <EnemyDisplay enemy={c} key={c.name} setOpponents={this.setOpponents}/>)}
