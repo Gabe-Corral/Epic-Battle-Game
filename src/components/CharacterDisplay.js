@@ -145,16 +145,16 @@ class CharacterDisplay extends Component {
 
               {this.state.showCharacter ? (
                 <div className="character-card">
-                    <h3>{this.state.character.name}</h3>
-                    <img className="character-img" src={this.state.character.img_url} alt=""></img>
-                    <h3>Stats:</h3>
-                    <div className="character-stats" >
-                        <p>Physical: {this.state.character.physical}</p>
-                        <p>Magic: {this.state.character.magic} </p>
-                        <p>Physical Defense: {this.state.character.physical_defense} </p>
-                        <p>Magic Defense: {this.state.character.magic_defense} </p>
-                    </div>
-                </div>
+                      <h3>{this.state.character.name}</h3>
+                      <img className="character-img" src={this.state.character.img_url} alt=""></img>
+                      <h3>Stats:</h3>
+                      <div className="character-stats" >
+                          <p>Physical: {this.state.character.physical}</p>
+                          <p>Magic: {this.state.character.magic} </p>
+                          <p>Physical Defense: {this.state.character.physical_defense} </p>
+                          <p>Magic Defense: {this.state.character.magic_defense} </p>
+                      </div>
+                  </div>
               ) : (
                 ""
               )}

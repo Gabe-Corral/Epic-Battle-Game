@@ -132,6 +132,7 @@ button:hover {
   border-radius: 20px;
   text-align: center;
   background-color: #0336719f;
+  display: inline-block;
 }
 
 
