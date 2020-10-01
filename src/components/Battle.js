@@ -7,7 +7,7 @@ class Battle extends React.Component {
   state = {
     heath: "",
     enemyHeath: "",
-    redirect: this.props.redirect
+    redirect: this.props.redirect,
   }
 
   render() {
