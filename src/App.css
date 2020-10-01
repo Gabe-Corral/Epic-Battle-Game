@@ -201,7 +201,7 @@ p {
 
 .enemy-battle {
   margin-left: 870px;
-  margin-top: -400px;
+  margin-top: -500px;
   min-height: 250px;
   max-width: 100%;
   text-align: center;
@@ -212,7 +212,21 @@ p {
 }
 
 .vs {
+  margin-top: -600px;
   margin: auto;
   color: red;
   font-family: "Times New Roman", Times, serif;
+}
+
+.dropdown {
+  color: white;
+  background-color: blue;
+  padding: 4px 4px;
+  border: none;
+  cursor: pointer;
+}
+
+label {
+  text-align: center;
+  color: white;
 }
