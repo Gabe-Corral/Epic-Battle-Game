@@ -44,8 +44,11 @@
 
 .login {
   text-align: center;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  min-height: 150px;
+  max-width: 100%;
 }
-
 
 form {
   border: 3px solid #f1f1f1;
@@ -199,36 +202,24 @@ p {
 }
 
 .form-title {
-  color: black;
+  color: white;
 }
 
 .attribute-title {
-  color: black;
+  color: white;
 }
 
 .points {
-  color: black;
+  color: white;
 }
 
 .enemy-battle {
-  margin-left: 870px;
-  margin-top: -500px;
-  min-height: 250px;
-  max-width: 100%;
   text-align: center;
   width: 350px;
   border: 2px solid #030303;
   border-radius: 20px;
   background-color: #8d0101ee;
 }
-
-.vs {
-  margin-top: -600px;
-  margin: auto;
-  color: red;
-  font-family: "Times New Roman", Times, serif;
-}
-
 
 .opponent {
   color: red
@@ -247,20 +238,74 @@ label {
   color: white;
 }
 
-.enemy-health {
-  margin-left: 875px;
-  margin-top: -10px;
-}
-
-.your-health {
-  margin-right: 875px;
-  margin-top: 40px;
-}
-
 .character-battle {
   width: 350px;
   border: 2px solid #030303;
   border-radius: 20px;
   text-align: center;
   background-color: #0336719f;
+}
+
+.battle-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  grid-gap: 3rem;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  justify-content: center;
+}
+
+.vs-banner {
+  position: relative;
+}
+
+.vs {
+  color: red;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  margin: -25px 0 0 -25px;
+}
+
+.fight-banner {
+  display: contents;
+}
+
+.fight {
+  color: white;
+  width: 350px;
+  height: 200px;
+  position: absolute;
+  top:3%;
+  left: 42%;
+  margin: -25px 0 0 -25px;
+}
+
+.enemy-health {
+  margin-left: 940px;
+  margin-top: -1px;
+}
+
+.your-health {
+  margin-top: 40px;
+  margin-left: 150px;
+}
+
+.battle-form {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.battle-form-container {
+  display: block;
+}
+
+.battle {
+  text-align: center;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  min-height: 150px;
+  max-width: 100%;
 }

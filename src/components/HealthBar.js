@@ -18,7 +18,7 @@ export default function HealthBar(props, {
     }, [props.damage])
 
   return (
-    <div onClick={() => setCount(50)}
+    <div
       style={{
         borderRadius: '3px',
         border: '1px solid black',
