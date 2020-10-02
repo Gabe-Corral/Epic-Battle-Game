@@ -1,62 +1,98 @@
 import React from 'react';
 import HealthBar from './HealthBar'
 import { Redirect } from 'react-router-dom';
+import vsImage from './img/vs.png';
+import fightImage from './img/fight.png';
 
 class Battle extends React.Component {
 
   state = {
     health: 100,
     redirect: this.props.redirect,
-    enemyHeath: 100,
-    attackPoints: null,
-    defenseMethod: null,
-    attackMethod: null,
-    enemyDamage: 100,
+    enemyHealth: 100,
+    win: '',
+    lose: ''
   }
 
-  handleClick = () => {
-    let damage = this.state.attackPoints;
-    let enemy_defense = ["magic_defense", "physical_defense"];
-    let enemy_defense_choice = enemy_defense[Math.floor(Math.random()*enemy_defense.length)];
-    if (this.props.enemy[enemy_defense_choice] > this.state.attackPoints) {
-      damage = 0
-    } else {
-      damage = this.state.attackPoints - this.props.enemy[enemy_defense_choice]
+  handleSubmit = (e) => {
+    e.preventDefault();
+    e.persist();
+
+    let yourHitPoints = 10;
+    let stance = e.target.stance.value;
+    let yourAttackPoints = 0;
+    let attackSelection = e.target.attack.value.split(" ");
+    let attackType = attackSelection[0].toLowerCase();
+
+    if (stance === "Normal Stance") {
+      yourAttackPoints = parseInt(this.props.character[attackType]);
+    } else if (stance === "Attack Stance") {
+      yourAttackPoints = parseInt(this.props.character[attackType]) + 2;
+    } else if (stance === "Defense Stance") {
+      yourAttackPoints = parseInt(this.props.character[attackType]) - 2;
     }
-    if (this.state.enemyDamage <= 0) {
-        this.setState({ enemyDamage: 0 })
-    } else {
-      this.setState({ enemyDamage: this.state.enemyDamage - damage })
-      this.enemyMove()
-    }
+    let enemyDefensePoints = this.props.enemy[attackType + "_defense"];
+
+    console.log(`${yourHitPoints + yourAttackPoints - enemyDefensePoints} damage to enemy health`)
+    this.setState( previousState => {
+      if (previousState.enemyHealth < (yourHitPoints + yourAttackPoints - enemyDefensePoints)) {
+        return {
+          enemyHealth: 0
+        }
+      } else {
+        return {
+          enemyHealth: this.state.enemyHealth - (yourHitPoints + yourAttackPoints - enemyDefensePoints)
+        }
+      }
+    }, () => this.enemyStanceChoice());
   }
 
-  enemyMove = () => {
-    let defense = this.state.defenseMethod;
-    let damage = 0
+  enemyStanceChoice = () => {
+    console.log(this.state.enemyHealth);
+    let enemy_stance = ["Normal Stance", "Attack Stance", "Defense Stance"];
+    let enemy_stance_choice = enemy_stance[Math.floor(Math.random()*enemy_stance.length)];
+
+    this.enemyMove(enemy_stance_choice);
+  }
+
+  enemyMove = (stance) => {
+    let hitPoints = 10;
+    let enemyAttackPoints = 0;
+    
     let enemy_attack = ["physical", "magic"];
     let enemy_attack_choice = enemy_attack[Math.floor(Math.random()*enemy_attack.length)];
-    if (this.props.enemy[enemy_attack_choice] < defense) {
-      damage = 0
-    } else {
-      damage = this.props.enemy[enemy_attack_choice] - defense;
+    
+    if (stance === "Normal Stance") {
+      enemyAttackPoints = this.props.enemy[enemy_attack_choice];
+    } else if (stance === "Attack Stance") {
+      enemyAttackPoints = this.props.enemy[enemy_attack_choice] + 2;
+    } else if (stance === "Defense Stance") {
+      enemyAttackPoints = this.props.enemy[enemy_attack_choice] - 2;
     }
-    this.setState({
-      health: this.state.health - damage
-     })
+
+    let yourDefensePoints = this.props.character[enemy_attack_choice + "_defense"];
+    console.log(`${hitPoints + enemyAttackPoints - yourDefensePoints} damage to your health`)
+    this.setState( previousState => {
+      if (previousState.health < (hitPoints + enemyAttackPoints - yourDefensePoints)) {
+        return {
+          health: 0
+        }
+      } else {
+        return {
+          health: this.state.health - (hitPoints + enemyAttackPoints - yourDefensePoints)
+        }
+      }
+    }, () => this.logCharacterHealth());
   }
 
-  handleAttack = (e) => {
-    this.setState({ attackPoints: this.props.character.physical, attackMethod: e.target.value })
-  }
-
-  handleDefense = (e) => {
-    const method = e.target.value
-    this.setState({ defenseMethod: this.props.character[method]})
+  logCharacterHealth = () => {
+    console.log(this.state.health);
   }
 
   componentDidUpdate = () => {
-    if (this.state.enemyDamage <= 0) {
+    if (this.state.health === 0) {
+      console.log("You Lost")
+    } else if (this.state.enemyHealth === 0) {
       console.log("You Won")
     }
   }
@@ -69,13 +105,16 @@ class Battle extends React.Component {
     return (
       <div className="battle">
       <div className="your-health">
-      <HealthBar damage={this.state.health}/>
+        <HealthBar damage={this.state.health}/>
       </div>
       <div className="enemy-health">
-      <HealthBar damage={this.state.enemyDamage}/>
+        <HealthBar damage={this.state.enemyHealth}/>
       </div>
-      <h1>Fight!</h1>
-      <div className="character-battle">
+      <div className= "fight-banner">
+        <img className="fight" src={fightImage} alt="Fight"></img>
+      </div>
+      <div className="battle-container">
+        <div className="character-battle">
           <h3>{this.props.character.name}</h3>
           <img className="character-img" src={this.props.character.img_url} alt=""></img>
           <h3>Stats:</h3>
@@ -85,21 +124,21 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.character.physical_defense} </p>
               <p>Magic Defense: {this.props.character.magic_defense} </p>
           </div>
-          <div>
-          <select className="dropdown" type="dropdown" onChange={this.handleAttack}>
-          <option>Physical Attack</option>
-          <option>Magic Attack</option>
-          </select>
-          <select className="dropdown" type="dropdown" onChange={this.handleDefense}>
-          <option value="physical_defense">Physical Defense</option>
-          <option value="magic_defense">Magic Defense</option>
-          </select>
-          </div>
-          <button className="attack-btn" onClick={this.handleClick}>Confirm</button>
         </div>
-
-          <h2 className="vs">VS.</h2>
-          <div className="enemy-battle">
+        <div className="vs-banner">
+          <img className="vs" src={vsImage} alt="VS"></img>
+          {this.state.win ? (
+                <span className="error">You Win!</span>
+            ) : (
+                ''
+            )}
+            {this.state.lose ? (
+                <span className="error">You Lose!</span>
+            ) : (
+                ''
+            )}
+        </div>
+        <div className="enemy-battle">
           <h3>{this.props.enemy.name}</h3>
           <img className="character-img" src={this.props.enemy.img_url} alt=""></img>
           <h3>Stats:</h3>
@@ -109,8 +148,25 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.enemy.physical_defense} </p>
               <p>Magic Defense: {this.props.enemy.magic_defense} </p>
           </div>
-          </div>
+        </div>
       </div>
+      <div className="battle-form-container">
+        <form className="battle-form" onSubmit={this.handleSubmit}>
+          <select className="dropdown" type="dropdown" name= "attack">
+          <option>Physical Attack</option>
+          <option>Magic Attack</option>
+          </select>
+          <select className="dropdown" type="dropdown" name= "stance">
+          <option value="Normal Stance">Normal Stance</option>
+          <option value="Attack Stance">Attack Stance</option>
+          <option value="Defense Stance">Defense Stance</option>
+          </select>
+          <div>
+          <button className="attack-btn" type= "submit" >Confirm</button>
+          </div>
+          </form>
+      </div>
+    </div>
     )
   }
 }
