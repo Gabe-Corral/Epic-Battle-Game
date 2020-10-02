@@ -10,8 +10,8 @@ class Battle extends React.Component {
     health: 100,
     redirect: this.props.redirect,
     enemyHealth: 100,
-    win: '',
-    lose: ''
+    yourDamage: 0,
+    enemyDamage: 0
   }
 
   handleSubmit = (e) => {
@@ -37,11 +37,13 @@ class Battle extends React.Component {
     this.setState( previousState => {
       if (previousState.enemyHealth < (yourHitPoints + yourAttackPoints - enemyDefensePoints)) {
         return {
-          enemyHealth: 0
+          enemyHealth: 0,
+          yourDamage: yourHitPoints + yourAttackPoints - enemyDefensePoints
         }
       } else {
         return {
-          enemyHealth: this.state.enemyHealth - (yourHitPoints + yourAttackPoints - enemyDefensePoints)
+          enemyHealth: this.state.enemyHealth - (yourHitPoints + yourAttackPoints - enemyDefensePoints),
+          yourDamage: yourHitPoints + yourAttackPoints - enemyDefensePoints
         }
       }
     }, () => this.enemyStanceChoice());
@@ -75,11 +77,13 @@ class Battle extends React.Component {
     this.setState( previousState => {
       if (previousState.health < (hitPoints + enemyAttackPoints - yourDefensePoints)) {
         return {
-          health: 0
+          health: 0,
+          enemyDamage: hitPoints + enemyAttackPoints - yourDefensePoints
         }
       } else {
         return {
-          health: this.state.health - (hitPoints + enemyAttackPoints - yourDefensePoints)
+          health: this.state.health - (hitPoints + enemyAttackPoints - yourDefensePoints),
+          enemyDamage: hitPoints + enemyAttackPoints - yourDefensePoints
         }
       }
     }, () => this.logCharacterHealth());
@@ -124,19 +128,16 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.character.physical_defense} </p>
               <p>Magic Defense: {this.props.character.magic_defense} </p>
           </div>
+          <div>
+          {this.state.enemyDamage !== 0 ? (
+            <span className="error">{this.state.enemyDamage} damage to your health!</span>
+          ) : (
+            ''
+          )}
+          </div>
         </div>
         <div className="vs-banner">
           <img className="vs" src={vsImage} alt="VS"></img>
-          {this.state.win ? (
-                <span className="error">You Win!</span>
-            ) : (
-                ''
-            )}
-            {this.state.lose ? (
-                <span className="error">You Lose!</span>
-            ) : (
-                ''
-            )}
         </div>
         <div className="enemy-battle">
           <h3>{this.props.enemy.name}</h3>
@@ -148,7 +149,28 @@ class Battle extends React.Component {
               <p>Physical Defense: {this.props.enemy.physical_defense} </p>
               <p>Magic Defense: {this.props.enemy.magic_defense} </p>
           </div>
+          <div>
+          {this.state.yourDamage !== 0 ? (
+            <span className="your-damage">{this.state.yourDamage} damage to enemy health!</span>
+          ) : (
+            ''
+            )}
+          </div>
         </div>
+      </div>
+      <div>
+      {this.state.health === 0 ? (
+        <h1 className="error">You lost to {this.props.enemy.name}!</h1>
+      ) : (
+        ''
+      )}
+      </div>
+      <div>
+      {this.state.enemyHealth === 0 ? (
+        <h1 className="win">You defeated {this.props.enemy.name}!</h1>
+      ) : (
+        ''
+      )}
       </div>
       <div className="battle-form-container">
         <form className="battle-form" onSubmit={this.handleSubmit}>
