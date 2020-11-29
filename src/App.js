@@ -15,12 +15,6 @@ class App extends React.Component {
     currentCharacter: {}
   }
 
-  componentDidMount = () => {
-    this.fetchData('user')
-    .then(res => res.json())
-    .then(data => console.log(data))
-  }
-
   fetchData = (type) => {
     return fetch(`${url}/${type}`)
   }
